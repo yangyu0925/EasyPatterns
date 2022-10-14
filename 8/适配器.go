@@ -14,7 +14,7 @@ func NewPhone(v V5) *Phone {
 	return &Phone{v}
 }
 
-func (p *Phone) Charge()  {
+func (p *Phone) Charge() {
 	fmt.Println("Phone进行充电...")
 	p.v.Use5V()
 }
@@ -26,20 +26,20 @@ func (v *V220) Use220V()  {
 }
 
 type Adapter struct {
-	V220 *V220
+	v220 *V220
 }
 
 func (a *Adapter) Use5V()  {
 	fmt.Println("使用适配器进行充电")
-	a.V220.Use220V()
+
+	a.v220.Use220V()
 }
 
 func NewAdapter(v220 *V220) *Adapter {
 	return &Adapter{v220}
 }
 
-func main()  {
+func main() {
 	iphone := NewPhone(NewAdapter(new(V220)))
-
 	iphone.Charge()
 }
