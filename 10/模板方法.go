@@ -8,23 +8,22 @@ type Beverage interface {
 	PourInCup()
 	AddThings()
 
-	WatAddThings() bool
+	WantAddThings() bool
 }
 
 type template struct {
 	b Beverage
 }
 
-func (t *template) MakeBeverage() {
+func (t *template) MakeBeverage()  {
 	if t == nil {
 		return
 	}
-
 	t.b.BoilWater()
 	t.b.Brew()
 	t.b.PourInCup()
 
-	if t.b.WatAddThings() == true {
+	if t.b.WantAddThings() == true {
 		t.b.AddThings()
 	}
 }
@@ -39,15 +38,15 @@ func NewMakeCaffee() *MakeCaffee {
 	return makeCaffe
 }
 
-func (mc *MakeCaffee) BoilWater()  {
+func (mc *MakeCaffee) BoilWater() {
 	fmt.Println("将水煮到100摄氏度")
 }
 
-func (mc *MakeCaffee) Brew()  {
+func (mc *MakeCaffee) Brew() {
 	fmt.Println("用水冲咖啡豆")
 }
 
-func (mc *MakeCaffee) PourInCup()  {
+func (mc *MakeCaffee) PourInCup() {
 	fmt.Println("将充好的咖啡倒入陶瓷杯中")
 }
 
@@ -55,8 +54,8 @@ func (mc *MakeCaffee) AddThings() {
 	fmt.Println("添加牛奶和糖")
 }
 
-func (mc *MakeCaffee) WatAddThings() bool {
-	return true
+func (mc *MakeCaffee) WantAddThings() bool {
+	return true //启动Hook条件
 }
 
 type MakeTea struct {
@@ -69,24 +68,24 @@ func NewMakeTea() *MakeTea {
 	return makeTea
 }
 
-func (mt *MakeTea) BoilWater()  {
+func (mt *MakeTea) BoilWater() {
 	fmt.Println("将水煮到80摄氏度")
 }
 
-func (mt *MakeTea) Brew()  {
+func (mt *MakeTea) Brew() {
 	fmt.Println("用水冲茶叶")
 }
 
-func (mt *MakeTea) PourInCup()  {
+func (mt *MakeTea) PourInCup() {
 	fmt.Println("将充好的咖啡倒入茶壶中")
 }
 
-func (mt *MakeTea) AddThings()  {
+func (mt *MakeTea) AddThings() {
 	fmt.Println("添加柠檬")
 }
 
-func (mt *MakeTea) WatAddThings() bool {
-	return false
+func (mt *MakeTea) WantAddThings() bool {
+	return true //关闭Hook条件
 }
 
 func main() {
@@ -94,6 +93,7 @@ func main() {
 	makeCoffee.MakeBeverage()
 
 	fmt.Println("------------")
+
 	MakeTea := NewMakeTea()
 	MakeTea.MakeBeverage()
 }
